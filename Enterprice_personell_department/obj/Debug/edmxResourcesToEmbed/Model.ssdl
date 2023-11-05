@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище EnterprisePersonnelDepartmentModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Адрес">
+    <Key>
+      <PropertyRef Name="id_Адреса" />
+    </Key>
+    <Property Name="id_Адреса" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Область" Type="nvarchar" MaxLength="50" />
+    <Property Name="Город" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Улица" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Дом" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="Квартира" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ВидРаботы">
+    <Key>
+      <PropertyRef Name="id_Работы" />
+    </Key>
+    <Property Name="id_Работы" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ВидРаботы" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ВидРодства">
+    <Key>
+      <PropertyRef Name="id_ВидаРодства" />
+    </Key>
+    <Property Name="id_ВидаРодства" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="СтепеньРодства" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Договор">
+    <Key>
+      <PropertyRef Name="id_Договора" />
+    </Key>
+    <Property Name="id_Договора" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ДатаСоставления" Type="date" Nullable="false" />
+    <Property Name="ДатаПриема" Type="date" Nullable="false" />
+    <Property Name="ДатаУвольнение" Type="date" />
+    <Property Name="id_Работы" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Должность">
+    <Key>
+      <PropertyRef Name="id_Должности" />
+    </Key>
+    <Property Name="id_Должности" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="НазваниеДолжности" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Оклад" Type="int" Nullable="false" />
+    <Property Name="НомерОфиса" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Образование">
+    <Key>
+      <PropertyRef Name="id_Образования" />
+    </Key>
+    <Property Name="id_Образования" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_Сотрудника" Type="int" Nullable="false" />
+    <Property Name="НазваниеУчебнойОрганизации" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="УровеньОбразование" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="СерияНомерДиплома" Type="nvarchar" MaxLength="14" Nullable="false" />
+    <Property Name="ДатаВыдачи" Type="date" Nullable="false" />
+    <Property Name="Специальность" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Квалификация" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ПаспортныеДанные">
+    <Key>
+      <PropertyRef Name="id_Паспорта" />
+    </Key>
+    <Property Name="id_Паспорта" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="НомерСерияПаспорта" Type="nvarchar" MaxLength="11" Nullable="false" />
+    <Property Name="КемВыдан" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ДатаВыдачи" Type="date" Nullable="false" />
+    <Property Name="КодПодразделения" Type="nvarchar" MaxLength="7" Nullable="false" />
+    <Property Name="МестоРождения" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="МестоЖительства" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Пользователь">
+    <Key>
+      <PropertyRef Name="id_Пользователя" />
+    </Key>
+    <Property Name="id_Пользователя" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Логин" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Пароль" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Токен" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Сотрудник">
+    <Key>
+      <PropertyRef Name="id_Сотрудника" />
+    </Key>
+    <Property Name="id_Сотрудника" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Фамилия" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Имя" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Отчество" Type="nvarchar" MaxLength="50" />
+    <Property Name="ДатаРождения" Type="date" Nullable="false" />
+    <Property Name="Пол" Type="nvarchar" MaxLength="7" Nullable="false" />
+    <Property Name="Гражданство" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Телефон" Type="nvarchar" MaxLength="16" Nullable="false" />
+    <Property Name="id_Адреса" Type="int" Nullable="false" />
+    <Property Name="id_Должности" Type="int" Nullable="false" />
+    <Property Name="id_Паспорта" Type="int" Nullable="false" />
+    <Property Name="id_Договора" Type="int" Nullable="false" />
+    <Property Name="Фото" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Токен">
+    <Key>
+      <PropertyRef Name="id_Токена" />
+    </Key>
+    <Property Name="id_Токена" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Токен" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ЧленыСемьиСотрудника">
+    <Key>
+      <PropertyRef Name="id_ЧленаСемьи" />
+    </Key>
+    <Property Name="id_ЧленаСемьи" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_Сотрудника" Type="int" Nullable="false" />
+    <Property Name="Фамилия" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Имя" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Отчество" Type="nvarchar" MaxLength="50" />
+    <Property Name="id_ВидаРодства" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Договор__id_Рабо__489AC854">
+    <End Role="ВидРаботы" Type="Self.ВидРаботы" Multiplicity="1" />
+    <End Role="Договор" Type="Self.Договор" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ВидРаботы">
+        <PropertyRef Name="id_Работы" />
+      </Principal>
+      <Dependent Role="Договор">
+        <PropertyRef Name="id_Работы" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Образован__id_Со__498EEC8D">
+    <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="1" />
+    <End Role="Образование" Type="Self.Образование" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Сотрудник">
+        <PropertyRef Name="id_Сотрудника" />
+      </Principal>
+      <Dependent Role="Образование">
+        <PropertyRef Name="id_Сотрудника" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Сотрудник__id_Ад__42E1EEFE">
+    <End Role="Адрес" Type="Self.Адрес" Multiplicity="1" />
+    <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Адрес">
+        <PropertyRef Name="id_Адреса" />
+      </Principal>
+      <Dependent Role="Сотрудник">
+        <PropertyRef Name="id_Адреса" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Сотрудник__id_До__43D61337">
+    <End Role="Должность" Type="Self.Должность" Multiplicity="1" />
+    <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Должность">
+        <PropertyRef Name="id_Должности" />
+      </Principal>
+      <Dependent Role="Сотрудник">
+        <PropertyRef Name="id_Должности" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Сотрудник__id_До__45BE5BA9">
+    <End Role="Договор" Type="Self.Договор" Multiplicity="1" />
+    <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Договор">
+        <PropertyRef Name="id_Договора" />
+      </Principal>
+      <Dependent Role="Сотрудник">
+        <PropertyRef Name="id_Договора" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Сотрудник__id_Па__44CA3770">
+    <End Role="ПаспортныеДанные" Type="Self.ПаспортныеДанные" Multiplicity="1" />
+    <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ПаспортныеДанные">
+        <PropertyRef Name="id_Паспорта" />
+      </Principal>
+      <Dependent Role="Сотрудник">
+        <PropertyRef Name="id_Паспорта" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ЧленыСемь__id_Ви__47A6A41B">
+    <End Role="ВидРодства" Type="Self.ВидРодства" Multiplicity="1" />
+    <End Role="ЧленыСемьиСотрудника" Type="Self.ЧленыСемьиСотрудника" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ВидРодства">
+        <PropertyRef Name="id_ВидаРодства" />
+      </Principal>
+      <Dependent Role="ЧленыСемьиСотрудника">
+        <PropertyRef Name="id_ВидаРодства" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ЧленыСемь__id_Со__46B27FE2">
+    <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="1" />
+    <End Role="ЧленыСемьиСотрудника" Type="Self.ЧленыСемьиСотрудника" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Сотрудник">
+        <PropertyRef Name="id_Сотрудника" />
+      </Principal>
+      <Dependent Role="ЧленыСемьиСотрудника">
+        <PropertyRef Name="id_Сотрудника" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище EnterprisePersonnelDepartmentModelContainer">
+    <EntitySet Name="Адрес" EntityType="Self.Адрес" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ВидРаботы" EntityType="Self.ВидРаботы" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ВидРодства" EntityType="Self.ВидРодства" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Договор" EntityType="Self.Договор" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Должность" EntityType="Self.Должность" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Образование" EntityType="Self.Образование" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ПаспортныеДанные" EntityType="Self.ПаспортныеДанные" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Пользователь" EntityType="Self.Пользователь" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Сотрудник" EntityType="Self.Сотрудник" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Токен" EntityType="Self.Токен" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ЧленыСемьиСотрудника" EntityType="Self.ЧленыСемьиСотрудника" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Договор__id_Рабо__489AC854" Association="Self.FK__Договор__id_Рабо__489AC854">
+      <End Role="ВидРаботы" EntitySet="ВидРаботы" />
+      <End Role="Договор" EntitySet="Договор" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Образован__id_Со__498EEC8D" Association="Self.FK__Образован__id_Со__498EEC8D">
+      <End Role="Сотрудник" EntitySet="Сотрудник" />
+      <End Role="Образование" EntitySet="Образование" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Сотрудник__id_Ад__42E1EEFE" Association="Self.FK__Сотрудник__id_Ад__42E1EEFE">
+      <End Role="Адрес" EntitySet="Адрес" />
+      <End Role="Сотрудник" EntitySet="Сотрудник" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Сотрудник__id_До__43D61337" Association="Self.FK__Сотрудник__id_До__43D61337">
+      <End Role="Должность" EntitySet="Должность" />
+      <End Role="Сотрудник" EntitySet="Сотрудник" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Сотрудник__id_До__45BE5BA9" Association="Self.FK__Сотрудник__id_До__45BE5BA9">
+      <End Role="Договор" EntitySet="Договор" />
+      <End Role="Сотрудник" EntitySet="Сотрудник" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Сотрудник__id_Па__44CA3770" Association="Self.FK__Сотрудник__id_Па__44CA3770">
+      <End Role="ПаспортныеДанные" EntitySet="ПаспортныеДанные" />
+      <End Role="Сотрудник" EntitySet="Сотрудник" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ЧленыСемь__id_Ви__47A6A41B" Association="Self.FK__ЧленыСемь__id_Ви__47A6A41B">
+      <End Role="ВидРодства" EntitySet="ВидРодства" />
+      <End Role="ЧленыСемьиСотрудника" EntitySet="ЧленыСемьиСотрудника" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ЧленыСемь__id_Со__46B27FE2" Association="Self.FK__ЧленыСемь__id_Со__46B27FE2">
+      <End Role="Сотрудник" EntitySet="Сотрудник" />
+      <End Role="ЧленыСемьиСотрудника" EntitySet="ЧленыСемьиСотрудника" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

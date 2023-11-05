@@ -1,0 +1,207 @@
+﻿<Page x:Class="Enterprice_personell_department.Pages.AddEditPageFamily"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Enterprice_personell_department.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1300"
+      Title="AddEditPageFamily">
+
+    <Canvas>
+        <Rectangle Fill="#FFF4F4F5" Height="630" Canvas.Left="10" Stroke="Black" Canvas.Top="10" Width="1280">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="17" Color="#FF8B8B8B" ShadowDepth="0"/>
+            </Rectangle.Effect>
+        </Rectangle>
+
+        <Grid Canvas.Bottom="0" Canvas.Top="10" Canvas.Left="10" Canvas.Right="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <!--20-->
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+
+            <!--Кнопки для переключения-->
+            <Button Name="Employee" Content="Сотрудник" Grid.Row="1" Grid.ColumnSpan="3" Click="Employee_Click"/>
+            <Button Name="Education" Content="Образование" Grid.Row="2" Grid.ColumnSpan="3" Click="Education_Click"/>
+            <Button Name="FamilyMembers" Content="Члены семьи" Grid.Row="3" Grid.ColumnSpan="3" Click="FamilyMembers_Click"/>
+            <Button Name="Address" Content="Адрес" Grid.Row="4" Grid.ColumnSpan="3" Click="Address_Click"/>
+            <Button Name="Job_title" Content="Договор" Grid.Row="5" Grid.ColumnSpan="3" Click="Job_title_Click"/>
+            <Button Name="Passport_details" Content="Пасп. данные" Grid.Row="6" Grid.ColumnSpan="3" Click="Passport_details_Click"/>
+
+            <!--SecondName-->
+            <Rectangle 
+                Grid.Column="6" 
+                Grid.ColumnSpan="8" 
+                Grid.Row="2" 
+                Fill="#D8F8F1" 
+                Stroke="#45C3A2" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Width="400" 
+                Height="36"/>
+
+            <TextBlock 
+                x:Name="hintSecondName" 
+                Text="Фамилия" Foreground="Gray"  
+                Grid.Column="7" 
+                Grid.ColumnSpan="4"
+                Grid.Row="2" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Height="36" 
+                Width="176" 
+                FontSize="20" 
+                Margin="0,5,20,0"/>
+
+            <TextBox 
+                x:Name="SecondNameBox" 
+                Grid.Column="6" 
+                Grid.ColumnSpan="8"
+                Grid.Row="2" 
+                TextChanged="SecondNameBox_TextChanged"
+                SelectionBrush="{x:Null}"/>
+
+            <!--Name-->
+            <Rectangle 
+                Grid.Column="6" 
+                Grid.ColumnSpan="8" 
+                Grid.Row="3" 
+                Fill="#D8F8F1" 
+                Stroke="#45C3A2" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Width="400" 
+                Height="36"/>
+
+            <TextBlock 
+                x:Name="hintName" 
+                Text="Имя" Foreground="Gray"  
+                Grid.Column="7" 
+                Grid.ColumnSpan="4"
+                Grid.Row="3" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Height="36" 
+                Width="176" 
+                FontSize="20" 
+                Margin="0,5,20,0"/>
+
+            <TextBox 
+                x:Name="NameBox" 
+                Grid.Column="6" 
+                Grid.ColumnSpan="8"
+                Grid.Row="3" 
+                TextChanged="NameBox_TextChanged"
+                SelectionBrush="{x:Null}"/>
+
+            <!--Surname-->
+            <Rectangle 
+                Grid.Column="6" 
+                Grid.ColumnSpan="8" 
+                Grid.Row="4" 
+                Fill="#D8F8F1" 
+                Stroke="#45C3A2" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Width="400" 
+                Height="36"/>
+
+            <TextBlock 
+                x:Name="hintSurname" 
+                Text="Отчество" Foreground="Gray"  
+                Grid.Column="7" 
+                Grid.ColumnSpan="4"
+                Grid.Row="4" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Height="36" 
+                Width="176" 
+                FontSize="20" 
+                Margin="0,5,20,0"/>
+
+            <TextBox 
+                x:Name="SurnameBox" 
+                Grid.Column="6" 
+                Grid.ColumnSpan="8"
+                Grid.Row="4" 
+                TextChanged="SurnameBox_TextChanged"
+                SelectionBrush="{x:Null}"/>
+
+            <!--KindOfRelationship-->
+            <Rectangle 
+                Grid.Column="6" 
+                Grid.ColumnSpan="8" 
+                Grid.Row="5" 
+                Fill="#D8F8F1" 
+                Stroke="#45C3A2" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Width="400" 
+                Height="36"/>
+
+            <TextBlock 
+                x:Name="hintKindOfRelationship" 
+                Text="Пол" Foreground="Gray"  
+                Grid.Column="7" 
+                Grid.ColumnSpan="4"
+                Grid.Row="5" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Height="36" 
+                Width="176" 
+                FontSize="20" 
+                Margin="0,5,20,0"/>
+
+            <ComboBox
+                x:Name="GenderComboBox"
+                Grid.Column="9" 
+                Grid.ColumnSpan="5"
+                Grid.Row="5"
+                Margin="15,19,58,19"
+                SelectedItem="Муж">
+                <TextBlock>Муж</TextBlock>
+                <TextBlock>Жена</TextBlock>
+                <TextBlock>Сын</TextBlock>
+                <TextBlock>Дочь</TextBlock>
+                <TextBlock>Отец</TextBlock>
+                <TextBlock>Мать</TextBlock>
+                <TextBlock>Внук</TextBlock>
+                <TextBlock>Внучка</TextBlock>
+                <TextBlock>Дедушка</TextBlock>
+                <TextBlock>Бабушка</TextBlock>
+            </ComboBox>
+        </Grid>
+    </Canvas>
+</Page>

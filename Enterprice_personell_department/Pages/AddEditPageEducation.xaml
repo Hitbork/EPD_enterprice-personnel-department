@@ -1,0 +1,265 @@
+﻿<Page x:Class="Enterprice_personell_department.Pages.AddEditPageEducation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Enterprice_personell_department.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1300"
+      Title="AddEditPageEducation">
+
+    <Canvas>
+        <Rectangle Fill="#FFF4F4F5" Height="630" Canvas.Left="10" Stroke="Black" Canvas.Top="10" Width="1280">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="17" Color="#FF8B8B8B" ShadowDepth="0"/>
+            </Rectangle.Effect>
+        </Rectangle>
+
+        <Grid Canvas.Bottom="0" Canvas.Top="10" Canvas.Left="10" Canvas.Right="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="64"/>
+                <!--20-->
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+
+            <!--Кнопки для переключения-->
+            <Button Name="Employee" Content="Сотрудник" Grid.Row="1" Grid.ColumnSpan="3" Click="Employee_Click"/>
+            <Button Name="Education" Content="Образование" Grid.Row="2" Grid.ColumnSpan="3" Click="Education_Click"/>
+            <Button Name="FamilyMembers" Content="Члены семьи" Grid.Row="3" Grid.ColumnSpan="3" Click="FamilyMembers_Click"/>
+            <Button Name="Address" Content="Адрес" Grid.Row="4" Grid.ColumnSpan="3" Click="Address_Click"/>
+            <Button Name="Job_title" Content="Договор" Grid.Row="5" Grid.ColumnSpan="3" Click="Job_title_Click"/>
+            <Button Name="Passport_details" Content="Пасп. данные" Grid.Row="6" Grid.ColumnSpan="3" Click="Passport_details_Click"/>
+
+            <!--EducationalOrganization-->
+            <Rectangle 
+                Grid.Column="2" 
+                Grid.ColumnSpan="8" 
+                Grid.Row="2" 
+                Fill="#D8F8F1" 
+                Stroke="#45C3A2" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Width="400" 
+                Height="36"/>
+
+            <TextBlock 
+                x:Name="hintEducationalOrganization" 
+                Text="Название учебной организации" Foreground="Gray"  
+                Grid.Column="3" 
+                Grid.ColumnSpan="7"
+                Grid.Row="2" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Height="36" 
+                Width="400" 
+                FontSize="20" 
+                Margin="0,5,20,0"/>
+
+            <TextBox 
+                x:Name="EducationalOrganizationBox" 
+                Grid.Column="2" 
+                Grid.ColumnSpan="8"
+                Grid.Row="2"
+                TextChanged="EducationalOrganizationBox_TextChanged"
+                SelectionBrush="{x:Null}"/>
+
+            <!--LevelOfEducation-->
+            <Rectangle 
+                Grid.Column="2" 
+                Grid.ColumnSpan="8" 
+                Grid.Row="3" 
+                Fill="#D8F8F1" 
+                Stroke="#45C3A2" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Width="400" 
+                Height="36"/>
+
+            <TextBlock 
+                x:Name="hintLevelOfEducation" 
+                Text="Уровень учебного образования" Foreground="Gray"  
+                Grid.Column="3" 
+                Grid.ColumnSpan="7"
+                Grid.Row="3" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Height="36" 
+                Width="400" 
+                FontSize="20" 
+                Margin="0,5,20,0"/>
+
+            <TextBox 
+                x:Name="LevelOfEducationBox" 
+                Grid.Column="2" 
+                Grid.ColumnSpan="8"
+                Grid.Row="3"
+                TextChanged="LevelOfEducationBox_TextChanged"
+                SelectionBrush="{x:Null}"/>
+
+            <!--SeriesAndNumberOfDiploma-->
+            <Rectangle 
+                Grid.Column="2" 
+                Grid.ColumnSpan="8" 
+                Grid.Row="4" 
+                Fill="#D8F8F1" 
+                Stroke="#45C3A2" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Width="400" 
+                Height="36"/>
+
+            <TextBlock 
+                x:Name="hintSeriesAndNumberOfDiploma" 
+                Text="Серия и номер диплома" Foreground="Gray"  
+                Grid.Column="3" 
+                Grid.ColumnSpan="7"
+                Grid.Row="4" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Height="36" 
+                Width="400" 
+                FontSize="20" 
+                Margin="0,5,20,0"/>
+
+            <TextBox 
+                x:Name="SeriesAndNumberOfDiplomaBox" 
+                Grid.Column="2" 
+                Grid.ColumnSpan="8"
+                Grid.Row="4"
+                TextChanged="SeriesAndNumberOfDiplomaBox_TextChanged"
+                SelectionBrush="{x:Null}"/>
+
+            <!--DateOfIssue-->
+            <Rectangle 
+                Grid.Column="10" 
+                Grid.ColumnSpan="8" 
+                Grid.Row="2" 
+                Fill="#D8F8F1" 
+                Stroke="#45C3A2" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Width="400" 
+                Height="36"/>
+
+            <TextBlock 
+                x:Name="hintDateOfIssue" 
+                Text="Дата выдачи" Foreground="Gray"  
+                Grid.Column="11" 
+                Grid.ColumnSpan="4"
+                Grid.Row="2" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Height="36" 
+                Width="176" 
+                FontSize="20" 
+                Margin="0,5,20,0"/>
+
+            <DatePicker
+                x:Name="DateOfIssueDatepicker"
+                Grid.Column="13"
+                Grid.ColumnSpan="5"
+                Grid.Row="2"
+                Margin="15,17,55,17"
+                VerticalAlignment="Center"
+                Background="Transparent"
+                Foreground="#FF333333"
+                BorderBrush="{x:Null}"/>
+
+            <!--Speciality-->
+            <Rectangle 
+                Grid.Column="10" 
+                Grid.ColumnSpan="8" 
+                Grid.Row="3" 
+                Fill="#D8F8F1" 
+                Stroke="#45C3A2" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Width="400" 
+                Height="36"/>
+
+            <TextBlock 
+                x:Name="hintSpeciality" 
+                Text="Специальность" Foreground="Gray"  
+                Grid.Column="11" 
+                Grid.ColumnSpan="4"
+                Grid.Row="3" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Height="36" 
+                Width="176" 
+                FontSize="20" 
+                Margin="0,5,20,0"/>
+
+            <TextBox 
+                x:Name="SpecialityBox" 
+                Grid.Column="10" 
+                Grid.ColumnSpan="8"
+                Grid.Row="3"
+                TextChanged="SpecialityBox_TextChanged"
+                SelectionBrush="{x:Null}"/>
+
+            <!--Qualification-->
+            <Rectangle 
+                Grid.Column="10" 
+                Grid.ColumnSpan="8" 
+                Grid.Row="4" 
+                Fill="#D8F8F1" 
+                Stroke="#45C3A2" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Width="400" 
+                Height="36"/>
+
+            <TextBlock 
+                x:Name="hintQualification" 
+                Text="Квалификация" Foreground="Gray"  
+                Grid.Column="11" 
+                Grid.ColumnSpan="4"
+                Grid.Row="4" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Height="36" 
+                Width="176" 
+                FontSize="20" 
+                Margin="0,5,20,0"/>
+
+            <TextBox 
+                x:Name="QualificationBox" 
+                Grid.Column="10" 
+                Grid.ColumnSpan="8"
+                Grid.Row="4" 
+                TextChanged="QualificationBox_TextChanged"
+                SelectionBrush="{x:Null}"/>
+        </Grid>
+    </Canvas>
+</Page>
