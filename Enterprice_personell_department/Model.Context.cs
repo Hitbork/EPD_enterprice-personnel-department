@@ -13,27 +13,27 @@ namespace Enterprice_personell_department
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DatabaseEntities : DbContext
+    public partial class EPDEntities : DbContext
     {
-        private static DatabaseEntities _context;
-
-        public DatabaseEntities()
-            : base("name=DatabaseEntities")
+        private static EPDEntities _context;
+        public EPDEntities()
+            : base("name=EPDEntities")
         {
         }
 
-        public static DatabaseEntities GetContext()
+        public static EPDEntities GetContext()
         {
             if (_context == null)
-                _context = new DatabaseEntities();
+                _context = new EPDEntities();
             return _context;
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Адрес> Адрес { get; set; }
         public virtual DbSet<ВидРаботы> ВидРаботы { get; set; }
         public virtual DbSet<ВидРодства> ВидРодства { get; set; }

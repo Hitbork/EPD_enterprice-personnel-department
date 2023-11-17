@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace Enterprice_personell_department.Pages
 {
@@ -25,7 +26,6 @@ namespace Enterprice_personell_department.Pages
     {
         private Сотрудник _currentEmployee = new Сотрудник();
 
-        
 
         public AddEditPageEmployee(Сотрудник selectedEmployee)
         {
@@ -33,9 +33,63 @@ namespace Enterprice_personell_department.Pages
 
             if (selectedEmployee != null)
                 _currentEmployee = selectedEmployee;
-
+            
             DataContext = _currentEmployee;
         }
+
+        public void ReadTheFile()
+        {
+            string[] strings = File.ReadAllLines("temp.txt").Where(v => v.Trim().IndexOf("Employee") != -1).ToArray();
+
+            string requiredLine = strings[0];
+
+            strings = requiredLine.Split('|');
+
+            // Something to check
+            SecondNameBox.Text = strings[1];
+            NameBox.Text = strings[2];
+            SurnameBox.Text = strings[3];
+            try
+            {
+                DateOfBirthDatepicker.SelectedDate = DateTime.Parse(strings[4]);
+            }
+            catch
+            {
+
+            }
+
+            if (strings[5] == "Мужской")
+            {
+                GenderComboBox.SelectedIndex = 0;
+            }
+            else
+            {
+                GenderComboBox.SelectedIndex = 1;
+            }
+
+            CititzenshipBox.Text = strings[6];
+            PhonenumberBox.Text = strings[7];
+        }
+
+        public void AddToTempFile()
+        {
+            string path = "temp.txt";
+
+            File.WriteAllLines(path, File.ReadAllLines(path).Where(v => v.Trim().IndexOf("Employee") == -1).ToArray());
+
+            using (StreamWriter writer = new StreamWriter("temp.txt", true))
+            {
+                writer.WriteAsync("Employee|");
+                writer.WriteAsync($"{SecondNameBox.Text}|");
+                writer.WriteAsync($"{NameBox.Text}|");
+                writer.WriteAsync($"{SurnameBox.Text}|");
+                writer.WriteAsync($"{DateOfBirthDatepicker.SelectedDate}|");
+                writer.WriteAsync($"{GenderComboBox.Text}|");
+                writer.WriteAsync($"{CititzenshipBox.Text}|");
+                writer.WriteAsync($"{PhonenumberBox.Text}\n");
+            }
+        }
+
 
         private void Employee_Click(object sender, RoutedEventArgs e)
         {
@@ -44,26 +98,31 @@ namespace Enterprice_personell_department.Pages
 
         private void Education_Click(object sender, RoutedEventArgs e)
         {
+            AddToTempFile();
             NavigationService?.Navigate(new AddEditPageEducation());
         }
 
         private void FamilyMembers_Click(object sender, RoutedEventArgs e)
         {
+            AddToTempFile();
             NavigationService?.Navigate(new AddEditPageFamily());
         }
 
         private void Address_Click(object sender, RoutedEventArgs e)
         {
+            AddToTempFile();
             NavigationService?.Navigate(new AddEditPageAddress());
         }
 
         private void Job_title_Click(object sender, RoutedEventArgs e)
         {
+            AddToTempFile();
             NavigationService?.Navigate(new AddEditPageJobTitle());
         }
 
         private void Passport_details_Click(object sender, RoutedEventArgs e)
         {
+            AddToTempFile();
             NavigationService?.Navigate(new AddEditPagePassportDetails());
         }
 
@@ -111,10 +170,10 @@ namespace Enterprice_personell_department.Pages
             if (string.IsNullOrWhiteSpace(_currentEmployee.Отчество))
                 errors.AppendLine("Введите отчество!");
 
-            //if (DateOfBirthDatepicker.SelectedDate == null)
-            //    errors.AppendLine("Укажите дату рождения!");
-            //else
-            //    _currentEmployee.ДатаРождения = DateOfBirthDatepicker.SelectedDate;
+            if (DateOfBirthDatepicker.SelectedDate == null)
+                errors.AppendLine("Укажите дату рождения!");
+            else
+                _currentEmployee.ДатаРождения = (DateTime)DateOfBirthDatepicker.SelectedDate;
 
             if (string.IsNullOrWhiteSpace(_currentEmployee.Гражданство))
                 errors.AppendLine("Введите гражданство!");
@@ -139,6 +198,48 @@ namespace Enterprice_personell_department.Pages
             hintPhonenumber.Visibility= Visibility.Visible;
             if (!String.IsNullOrEmpty(PhonenumberBox.Text))
                 hintPhonenumber.Visibility= Visibility.Hidden;
+        }
+
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            string[] strings = File.ReadAllLines("temp.txt").Where(v => v.Trim().IndexOf("Employee") != -1).ToArray();
+
+            string requiredLine = strings[0];
+
+            strings = requiredLine.Split('|');
+
+            // Something to check
+            SecondNameBox.Text = strings[1];
+            NameBox.Text = strings[2];
+            SurnameBox.Text = strings[3];
+            try
+            {
+                DateOfBirthDatepicker.SelectedDate = DateTime.Parse(strings[4]);
+            }
+            catch
+            {
+
+            }
+            
+            if (strings[5] != "")
+            {
+                if (strings[5] == "Мужской")
+                {
+                    GenderComboBox.SelectedIndex = 0;
+                }
+                else
+                {
+                    GenderComboBox.SelectedIndex = 1;
+                }
+            }
+
+            CititzenshipBox.Text = strings[6];
+            PhonenumberBox.Text = strings[7];
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ReadTheFile();
         }
     }
 }

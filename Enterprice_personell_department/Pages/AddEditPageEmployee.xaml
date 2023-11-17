@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Enterprice_personell_department.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="1300"
-      Title="AddEditPageEmployee">
+      Title="AddEditPageEmployee" Loaded="Page_Loaded">
 
     
     
@@ -305,6 +305,14 @@
                 Text="{Binding Телефон}" 
                 TextChanged="PhonenumberBox_TextChanged"
                 SelectionBrush="{x:Null}"/>
+
+
+            <Button
+                Grid.Column="5"
+                Grid.Row="7"
+                Grid.ColumnSpan="3"
+                Content="Обновить" Click="Refresh_Click"
+                />
         </Grid>
     </Canvas>
 </Page>

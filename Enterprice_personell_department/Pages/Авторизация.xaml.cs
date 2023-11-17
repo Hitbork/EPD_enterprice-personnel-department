@@ -58,15 +58,50 @@ namespace Enterprice_personell_department.Pages
                 return;
             }
 
+            string connectionString = "data source=EGA\\SQLEXPRESS;Initial Catalog=Enterprice_persennol_department;Integrated Security=true";
 
-            if (LoginBox.Text == "Admin" && PasswordBox.Password == "Admin")
-            {
-                MessageBox.Show("Добро пожаловать в систему!");
+            string queryString = $"SELECT * from Пользователь WHERE Логин = '{LoginBox.Text}' AND Пароль = '{GetHash(PasswordBox.Password)}'";
 
-                NavigationService?.Navigate(new MainMenu());
-            } else
+            using (SqlConnection connection =
+           new SqlConnection(connectionString))
             {
-                MessageBox.Show("Пользователь с таким именем не найден!");
+                // Create the Command and Parameter objects.
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                // Open the connection in a try/catch block.
+                // Create and execute the DataReader, writing the result
+                // set to the console window.
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        reader.Close();
+                        MessageBox.Show("Добро пожаловать в систему!");
+
+                        NavigationService?.Navigate(new MainMenu());
+                    }
+                    else
+                    {
+                        reader.Close();
+                        string queryStringForSearchingLogins = $"SELECT * from Пользователь WHERE Логин = '{LoginBox.Text}'";
+                        SqlCommand commandForSearching = new SqlCommand(queryStringForSearchingLogins, connection);
+                        SqlDataReader reader1 = commandForSearching.ExecuteReader();
+                        if (reader1.HasRows)
+                        {
+                            MessageBox.Show("Неправильный пароль!");
+                        } else
+                        {
+                            MessageBox.Show("Пользователь с таким логином не найден!");
+                        }
+                        reader1.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 

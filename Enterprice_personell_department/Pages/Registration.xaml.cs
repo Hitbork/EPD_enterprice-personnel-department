@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration.Provider;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
@@ -22,6 +23,7 @@ namespace Enterprice_personell_department.Pages
     /// </summary>
     public partial class Registration : Page
     {
+
         public Registration()
         {
             InitializeComponent();
@@ -70,7 +72,8 @@ namespace Enterprice_personell_department.Pages
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrEmpty(LoginBox.Text)  || String.IsNullOrEmpty(PasswordBox.Password) || String.IsNullOrEmpty(ConfirmationPasswordBox.Password) || String.IsNullOrEmpty(TokenBox.Text))
+            if (String.IsNullOrEmpty(LoginBox.Text)  || String.IsNullOrEmpty(PasswordBox.Password) 
+                || String.IsNullOrEmpty(ConfirmationPasswordBox.Password) || String.IsNullOrEmpty(TokenBox.Text))
             {
                 MessageBox.Show("Не все поля заполнены!");
                 return;
@@ -82,20 +85,88 @@ namespace Enterprice_personell_department.Pages
                 return;
             }
 
-            DatabaseEntities db = new DatabaseEntities();
-
-            Пользователь user = new Пользователь()
+            string connectionString = "data source=EGA\\SQLEXPRESS;Initial Catalog=Enterprice_persennol_department;Integrated Security=true";
+            
+            using (SqlConnection connection =
+           new SqlConnection(connectionString))
             {
-                Логин = LoginBox.Text,
-                Пароль = GetHash(PasswordBox.Password),
-                Токен = TokenBox.Text
-            };
+                // Checking if there is an existing same login in DB
+                bool isThereSameLogin = true;
 
-            db.Пользователь.Add(user);
+                string queryExistingLogin = $"SELECT * from Пользователь WHERE Логин = '{LoginBox.Text}'";
 
-            db.SaveChanges();
+                SqlCommand commandExisitngLogin = new SqlCommand(queryExistingLogin, connection);
 
-            MessageBox.Show("Пользователь создан!");
+                try
+                {
+                    connection.Open();
+                    SqlDataReader readerLogin = commandExisitngLogin.ExecuteReader();
+
+                    isThereSameLogin = readerLogin.HasRows;
+
+                    readerLogin.Close();
+                } 
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                if (isThereSameLogin)
+                {
+                    MessageBox.Show("Такой логин уже существует! Введите другой!");
+                    return;
+                }
+
+                // Checking if there is token in DB
+                bool isThereToken = false;
+
+                string queryString = $"SELECT * from Токен WHERE Токен = {TokenBox.Text}";
+
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                try
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    isThereToken= reader.HasRows;
+                    
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                if (!isThereToken)
+                {
+                    MessageBox.Show("Такого токена не существует в базе");
+                    return;
+                }
+
+                // Creating new user
+                EPDEntities db = new EPDEntities();
+
+                Пользователь user = new Пользователь()
+                {
+                    Логин = LoginBox.Text,
+                    Пароль = GetHash(PasswordBox.Password),
+                    Токен = TokenBox.Text
+                };
+
+                db.Пользователь.Add(user);
+
+                db.SaveChanges();
+
+                // Deleting token from existance 
+                string queryForDelete = $"DELETE FROM Токен WHERE Токен = '{TokenBox.Text}'";
+
+                SqlCommand commandForDelete = new SqlCommand(queryForDelete, connection);
+
+                commandForDelete.ExecuteNonQuery();
+
+                MessageBox.Show("Пользователь создан!");
+            }
+
         }
     }
 }

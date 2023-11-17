@@ -25,7 +25,7 @@ namespace Enterprice_personell_department.Pages
         public MainMenu()
         {
             InitializeComponent();
-            DataGridEmployees.ItemsSource = DatabaseEntities.GetContext().Сотрудник.ToList();
+            DataGridEmployees.ItemsSource = EPDEntities.GetContext().Сотрудник.ToList();
         }
 
         private void ButtonEdit_Click(object sender, RoutedEventArgs e)
@@ -46,8 +46,8 @@ namespace Enterprice_personell_department.Pages
 
             try
             {
-                DatabaseEntities.GetContext().Сотрудник.RemoveRange(employeesForRemoving);
-                DatabaseEntities.GetContext().SaveChanges();
+                EPDEntities.GetContext().Сотрудник.RemoveRange(employeesForRemoving);
+                EPDEntities.GetContext().SaveChanges();
                 MessageBox.Show("Данные успешно удалены!");
             } catch (Exception ex)
             {

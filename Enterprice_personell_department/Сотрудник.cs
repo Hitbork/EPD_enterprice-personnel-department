@@ -33,7 +33,6 @@ namespace Enterprice_personell_department
         public int id_Должности { get; set; }
         public int id_Паспорта { get; set; }
         public int id_Договора { get; set; }
-        public string Фото { get; set; }
     
         public virtual Адрес Адрес { get; set; }
         public virtual Договор Договор { get; set; }

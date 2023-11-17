@@ -1,8 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Хранилище EnterprisePersonnelDepartmentModelContainer" CdmEntityContainer="DatabaseEntities">
+  <EntityContainerMapping StorageEntityContainer="Хранилище EPDModelContainer" CdmEntityContainer="EPDEntities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="EPDModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Адрес">
-      <EntityTypeMapping TypeName="EnterprisePersonnelDepartmentModel.Адрес">
+      <EntityTypeMapping TypeName="EPDModel.Адрес">
         <MappingFragment StoreEntitySet="Адрес">
           <ScalarProperty Name="id_Адреса" ColumnName="id_Адреса" />
           <ScalarProperty Name="Область" ColumnName="Область" />
@@ -14,7 +25,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ВидРаботы">
-      <EntityTypeMapping TypeName="EnterprisePersonnelDepartmentModel.ВидРаботы">
+      <EntityTypeMapping TypeName="EPDModel.ВидРаботы">
         <MappingFragment StoreEntitySet="ВидРаботы">
           <ScalarProperty Name="id_Работы" ColumnName="id_Работы" />
           <ScalarProperty Name="ВидРаботы1" ColumnName="ВидРаботы" />
@@ -22,7 +33,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ВидРодства">
-      <EntityTypeMapping TypeName="EnterprisePersonnelDepartmentModel.ВидРодства">
+      <EntityTypeMapping TypeName="EPDModel.ВидРодства">
         <MappingFragment StoreEntitySet="ВидРодства">
           <ScalarProperty Name="id_ВидаРодства" ColumnName="id_ВидаРодства" />
           <ScalarProperty Name="СтепеньРодства" ColumnName="СтепеньРодства" />
@@ -30,7 +41,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Договор">
-      <EntityTypeMapping TypeName="EnterprisePersonnelDepartmentModel.Договор">
+      <EntityTypeMapping TypeName="EPDModel.Договор">
         <MappingFragment StoreEntitySet="Договор">
           <ScalarProperty Name="id_Договора" ColumnName="id_Договора" />
           <ScalarProperty Name="ДатаСоставления" ColumnName="ДатаСоставления" />
@@ -41,7 +52,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Должность">
-      <EntityTypeMapping TypeName="EnterprisePersonnelDepartmentModel.Должность">
+      <EntityTypeMapping TypeName="EPDModel.Должность">
         <MappingFragment StoreEntitySet="Должность">
           <ScalarProperty Name="id_Должности" ColumnName="id_Должности" />
           <ScalarProperty Name="НазваниеДолжности" ColumnName="НазваниеДолжности" />
@@ -51,7 +62,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Образование">
-      <EntityTypeMapping TypeName="EnterprisePersonnelDepartmentModel.Образование">
+      <EntityTypeMapping TypeName="EPDModel.Образование">
         <MappingFragment StoreEntitySet="Образование">
           <ScalarProperty Name="id_Образования" ColumnName="id_Образования" />
           <ScalarProperty Name="id_Сотрудника" ColumnName="id_Сотрудника" />
@@ -65,7 +76,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ПаспортныеДанные">
-      <EntityTypeMapping TypeName="EnterprisePersonnelDepartmentModel.ПаспортныеДанные">
+      <EntityTypeMapping TypeName="EPDModel.ПаспортныеДанные">
         <MappingFragment StoreEntitySet="ПаспортныеДанные">
           <ScalarProperty Name="id_Паспорта" ColumnName="id_Паспорта" />
           <ScalarProperty Name="НомерСерияПаспорта" ColumnName="НомерСерияПаспорта" />
@@ -78,7 +89,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Пользователь">
-      <EntityTypeMapping TypeName="EnterprisePersonnelDepartmentModel.Пользователь">
+      <EntityTypeMapping TypeName="EPDModel.Пользователь">
         <MappingFragment StoreEntitySet="Пользователь">
           <ScalarProperty Name="id_Пользователя" ColumnName="id_Пользователя" />
           <ScalarProperty Name="Логин" ColumnName="Логин" />
@@ -88,7 +99,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Сотрудник">
-      <EntityTypeMapping TypeName="EnterprisePersonnelDepartmentModel.Сотрудник">
+      <EntityTypeMapping TypeName="EPDModel.Сотрудник">
         <MappingFragment StoreEntitySet="Сотрудник">
           <ScalarProperty Name="id_Сотрудника" ColumnName="id_Сотрудника" />
           <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
@@ -102,12 +113,11 @@
           <ScalarProperty Name="id_Должности" ColumnName="id_Должности" />
           <ScalarProperty Name="id_Паспорта" ColumnName="id_Паспорта" />
           <ScalarProperty Name="id_Договора" ColumnName="id_Договора" />
-          <ScalarProperty Name="Фото" ColumnName="Фото" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Токен">
-      <EntityTypeMapping TypeName="EnterprisePersonnelDepartmentModel.Токен">
+      <EntityTypeMapping TypeName="EPDModel.Токен">
         <MappingFragment StoreEntitySet="Токен">
           <ScalarProperty Name="id_Токена" ColumnName="id_Токена" />
           <ScalarProperty Name="Токен1" ColumnName="Токен" />
@@ -115,7 +125,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ЧленыСемьиСотрудника">
-      <EntityTypeMapping TypeName="EnterprisePersonnelDepartmentModel.ЧленыСемьиСотрудника">
+      <EntityTypeMapping TypeName="EPDModel.ЧленыСемьиСотрудника">
         <MappingFragment StoreEntitySet="ЧленыСемьиСотрудника">
           <ScalarProperty Name="id_ЧленаСемьи" ColumnName="id_ЧленаСемьи" />
           <ScalarProperty Name="id_Сотрудника" ColumnName="id_Сотрудника" />

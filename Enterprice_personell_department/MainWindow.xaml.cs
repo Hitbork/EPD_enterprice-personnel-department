@@ -77,7 +77,7 @@ namespace Enterprice_personell_department
 
             StreamWriter sw = new StreamWriter(path);
 
-            using (var db = new DatabaseEntities())
+            using (var db = new EPDEntities())
             {
                 string IDLine = String.Join(":", db.Пользователь.Select(x => x.id_Пользователя));
                 sw.Write(":");
