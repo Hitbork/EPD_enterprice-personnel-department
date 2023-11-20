@@ -267,6 +267,14 @@
                 TextChanged="LocationBox_TextChanged"
                 SelectionBrush="{x:Null}"
                 MaxLength="100"/>
+            
+            <!--Button to send info-->
+            <Button Name="SendInfo"
+                    Content="Отправить данные"
+                    Grid.Row="7"
+                    Grid.Column="15"
+                    Grid.ColumnSpan="3"
+                    Click="SendInfo_Click"/>
         </Grid>
     </Canvas>
 </Page>
