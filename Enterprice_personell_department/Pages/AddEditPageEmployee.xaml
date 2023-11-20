@@ -95,7 +95,8 @@
                 Grid.Row="2"
                 Text="{Binding Фамилия}" 
                 TextChanged="SecondNameBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="50"/>
 
             <!--Name-->
             <Rectangle 
@@ -129,7 +130,8 @@
                 Grid.Row="3"
                 Text="{Binding Имя}"
                 TextChanged="NameBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="50"/>
 
             <!--Surname-->
             <Rectangle 
@@ -163,7 +165,8 @@
                 Grid.Row="4"
                 Text="{Binding Отчество}"
                 TextChanged="SurnameBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="50"/>
 
             <!--DateOfBirth-->
             <Rectangle 
@@ -270,7 +273,8 @@
                 Grid.Row="4"
                 Text="{Binding Гражданство}" 
                 TextChanged="CititzenshipBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="25"/>
 
             <!--Phonenumber-->
             <Rectangle 
@@ -304,15 +308,52 @@
                 Grid.Row="5"
                 Text="{Binding Телефон}" 
                 TextChanged="PhonenumberBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="16"/>
 
+            <!--Job title-->
+            <Rectangle 
+                Grid.Column="6" 
+                Grid.ColumnSpan="8" 
+                Grid.Row="6" 
+                Fill="#D8F8F1" 
+                Stroke="#45C3A2" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Width="400" 
+                Height="36"/>
 
-            <Button
-                Grid.Column="5"
-                Grid.Row="7"
-                Grid.ColumnSpan="3"
-                Content="Обновить" Click="Refresh_Click"
-                />
+            <TextBlock 
+                x:Name="hintJobTitle" 
+                Text="Должность" Foreground="Gray"  
+                Grid.Column="7" 
+                Grid.ColumnSpan="4"
+                Grid.Row="6" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Height="36" 
+                Width="176" 
+                FontSize="20" 
+                Margin="0,5,20,0"/>
+
+            <ComboBox
+                x:Name="JobTitleComboBox"
+                Grid.Column="9" 
+                Grid.ColumnSpan="5"
+                Grid.Row="6"
+                Margin="15,19,58,19"
+                SelectedItem="{Binding Должность}">
+                <TextBlock>Бухгалтер</TextBlock>
+                <TextBlock>Техник</TextBlock>
+                <TextBlock>Техник-технолог</TextBlock>
+                <TextBlock>Инженер-технолог</TextBlock>
+                <TextBlock>Геолог</TextBlock>
+                <TextBlock>Главный геолог</TextBlock>
+                <TextBlock>Начальник отдела</TextBlock>
+                <TextBlock>Слесарь</TextBlock>
+                <TextBlock>Врач</TextBlock>
+                <TextBlock>Контролер качества</TextBlock>
+            </ComboBox>
         </Grid>
     </Canvas>
 </Page>

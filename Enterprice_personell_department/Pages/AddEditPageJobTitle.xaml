@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Enterprice_personell_department.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="1300"
-      Title="AddEditPageJobTitle">
+      Title="AddEditPageJobTitle" Loaded="Page_Loaded">
 
     <Canvas>
         <Rectangle Fill="#FFF4F4F5" Height="630" Canvas.Left="10" Stroke="Black" Canvas.Top="10" Width="1280">
@@ -194,7 +194,7 @@
                 Margin="0,5,20,0"/>
 
             <ComboBox
-                x:Name="GenderComboBox"
+                x:Name="TypeOfWorkComboBox"
                 Grid.Column="9" 
                 Grid.ColumnSpan="5"
                 Grid.Row="5"

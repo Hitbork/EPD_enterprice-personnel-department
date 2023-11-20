@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Enterprice_personell_department.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="1300"
-      Title="AddEditPageEducation">
+      Title="AddEditPageEducation" Loaded="Page_Loaded">
 
     <Canvas>
         <Rectangle Fill="#FFF4F4F5" Height="630" Canvas.Left="10" Stroke="Black" Canvas.Top="10" Width="1280">
@@ -157,7 +157,7 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="4"
                 TextChanged="SeriesAndNumberOfDiplomaBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}" Text="&#x9;"/>
 
             <!--DateOfIssue-->
             <Rectangle 
