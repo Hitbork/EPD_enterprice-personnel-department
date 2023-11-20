@@ -91,7 +91,8 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="2" 
                 TextChanged="RegionBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="50"/>
 
             <!--City-->
             <Rectangle 
@@ -124,7 +125,8 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="3" 
                 TextChanged="CityBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="50"/>
 
             <!--Street-->
             <Rectangle 
@@ -157,7 +159,8 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="4" 
                 TextChanged="StreetBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="100"/>
 
             <!--HouseNumber-->
             <Rectangle 
@@ -190,7 +193,8 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="5" 
                 TextChanged="HouseNumberBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="3"/>
 
             <!--FlatNumber-->
             <Rectangle 

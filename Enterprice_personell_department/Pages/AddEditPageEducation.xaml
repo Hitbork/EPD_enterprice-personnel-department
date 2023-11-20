@@ -91,7 +91,8 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="2"
                 TextChanged="EducationalOrganizationBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="100"/>
 
             <!--LevelOfEducation-->
             <Rectangle 
@@ -124,7 +125,8 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="3"
                 TextChanged="LevelOfEducationBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="30"/>
 
             <!--SeriesAndNumberOfDiploma-->
             <Rectangle 
@@ -157,7 +159,8 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="4"
                 TextChanged="SeriesAndNumberOfDiplomaBox_TextChanged"
-                SelectionBrush="{x:Null}" Text="&#x9;"/>
+                SelectionBrush="{x:Null}" Text="&#x9;"
+                MaxLength="14"/>
 
             <!--DateOfIssue-->
             <Rectangle 
@@ -226,7 +229,8 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="3"
                 TextChanged="SpecialityBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="100"/>
 
             <!--Qualification-->
             <Rectangle 
@@ -259,7 +263,8 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="4" 
                 TextChanged="QualificationBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="50"/>
         </Grid>
     </Canvas>
 </Page>

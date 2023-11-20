@@ -91,7 +91,8 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="2"
                 TextChanged="SeriesAndNumberPassportBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="11"/>
 
             <!--IssuedBy-->
             <Rectangle 
@@ -124,7 +125,8 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="3" 
                 TextChanged="IssuedByBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="100"/>
 
             <!--DateOfIssue-->
             <Rectangle 
@@ -193,7 +195,8 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="3" 
                 TextChanged="DivisionCodeBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="7"/>
 
             <!--PlaceOfBirth-->
             <Rectangle 
@@ -226,7 +229,8 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="4" 
                 TextChanged="PlaceOfBirthBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="30"/>
 
             <!--Location-->
             <Rectangle 
@@ -259,7 +263,8 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="5" 
                 TextChanged="LocationBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                MaxLength="100"/>
         </Grid>
     </Canvas>
 </Page>
