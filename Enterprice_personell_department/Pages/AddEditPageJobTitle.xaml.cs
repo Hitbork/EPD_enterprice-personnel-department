@@ -116,32 +116,58 @@ namespace Enterprice_personell_department.Pages
                 writer.WriteAsync($"{DateOfPreparationpicker.SelectedDate}|");
                 writer.WriteAsync($"{EmploymentDatepicker.SelectedDate}|");
                 writer.WriteAsync($"{FireDatepicker.SelectedDate}|");
-                writer.WriteAsync($"{TypeOfWorkComboBox.Text}|");
+                writer.WriteAsync($"{TypeOfWorkComboBox.Text}\n");
             }
+        }
+
+        public bool CheckForErrors()
+        {
+            if (String.IsNullOrEmpty(DateOfPreparationpicker.Text) ||
+                String.IsNullOrEmpty(EmploymentDatepicker.Text) ||
+                String.IsNullOrEmpty(FireDatepicker.Text) ||
+                String.IsNullOrEmpty(TypeOfWorkComboBox.Text))
+            {
+                MessageBox.Show("Не все поля заполнены!");
+                return false;
+            }
+
+            return true;
         }
 
         private void Employee_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPageEmployee(null));
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPageEmployee(null));
+            }
         }
 
         private void Education_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPageEducation());
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPageEducation());
+            }
         }
 
         private void FamilyMembers_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPageFamily());
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPageFamily());
+            }
         }
 
         private void Address_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPageAddress());
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPageAddress());
+            }
         }
 
         private void Job_title_Click(object sender, RoutedEventArgs e)
@@ -151,8 +177,11 @@ namespace Enterprice_personell_department.Pages
 
         private void Passport_details_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPagePassportDetails());
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPagePassportDetails());
+            }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

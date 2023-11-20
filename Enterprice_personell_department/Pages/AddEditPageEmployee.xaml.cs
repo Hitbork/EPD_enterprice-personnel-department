@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -132,6 +133,31 @@ namespace Enterprice_personell_department.Pages
             }
         }
 
+        public bool CheckForErrors()
+        {
+            string phoneNumberRegex = @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$";
+
+            if (!Regex.IsMatch(PhonenumberBox.Text, phoneNumberRegex))
+            {
+                MessageBox.Show("Неправильно введён номер!");
+                return false;
+            }
+
+            if (String.IsNullOrEmpty(SecondNameBox.Text) ||
+                String.IsNullOrEmpty(NameBox.Text) ||
+                String.IsNullOrEmpty(DateOfBirthDatepicker.Text) ||
+                String.IsNullOrEmpty(GenderComboBox.Text) ||
+                String.IsNullOrEmpty(CititzenshipBox.Text) ||
+                String.IsNullOrEmpty(PhonenumberBox.Text) ||
+                String.IsNullOrEmpty(JobTitleComboBox.Text))
+            {
+                MessageBox.Show("Не все данные заполнены!");
+                return false;
+            }
+
+            return true;
+        }
+
 
         private void Employee_Click(object sender, RoutedEventArgs e)
         {
@@ -140,32 +166,47 @@ namespace Enterprice_personell_department.Pages
 
         private void Education_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPageEducation());
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPageEducation());
+            }
         }
 
         private void FamilyMembers_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPageFamily());
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPageFamily());
+            }
         }
 
         private void Address_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPageAddress());
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPageAddress());
+            }
         }
 
         private void Job_title_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPageJobTitle());
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPageJobTitle());
+            }
         }
 
         private void Passport_details_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPagePassportDetails());
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPagePassportDetails());
+            }
         }
 
         private void SecondNameBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -237,7 +278,7 @@ namespace Enterprice_personell_department.Pages
 
         private void PhonenumberBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            hintPhonenumber.Visibility= Visibility.Visible;
+           hintPhonenumber.Visibility= Visibility.Visible;
             
             if (!String.IsNullOrEmpty(PhonenumberBox.Text))
                 hintPhonenumber.Visibility = Visibility.Hidden;

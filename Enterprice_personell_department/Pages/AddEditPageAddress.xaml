@@ -227,7 +227,8 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="6" 
                 TextChanged="FlatNumberBox_TextChanged"
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                PreviewTextInput="FlatNumberBox_PreviewTextInput"/>
         </Grid>
     </Canvas>
 </Page>

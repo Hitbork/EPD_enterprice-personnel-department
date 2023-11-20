@@ -160,7 +160,8 @@
                 Grid.Row="4"
                 TextChanged="SeriesAndNumberOfDiplomaBox_TextChanged"
                 SelectionBrush="{x:Null}" Text="&#x9;"
-                MaxLength="14"/>
+                MaxLength="14"
+                PreviewTextInput="SeriesAndNumberOfDiplomaBox_PreviewTextInput"/>
 
             <!--DateOfIssue-->
             <Rectangle 

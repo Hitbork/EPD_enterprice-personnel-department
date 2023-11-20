@@ -97,16 +97,35 @@ namespace Enterprice_personell_department.Pages
             }
         }
 
+        public bool CheckForErrors()
+        {
+            if (String.IsNullOrEmpty(SecondNameBox.Text) ||
+                String.IsNullOrEmpty(NameBox.Text) ||
+                String.IsNullOrEmpty(KindOfRelationshipComboBox.Text))
+            {
+                MessageBox.Show("Не все данные заполнены!");
+                return false;
+            }
+
+            return true;
+        }
+
         private void Employee_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPageEmployee(null));
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPageEmployee(null));
+            } 
         }
 
         private void Education_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPageEducation());
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPageEducation());
+            }
         }
 
         private void FamilyMembers_Click(object sender, RoutedEventArgs e)
@@ -116,20 +135,29 @@ namespace Enterprice_personell_department.Pages
 
         private void Address_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPageAddress());
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPageAddress());
+            }
         }
 
         private void Job_title_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPageJobTitle());
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPageJobTitle());
+            }
         }
 
         private void Passport_details_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPagePassportDetails());
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPagePassportDetails());
+            }
         }
 
         private void SecondNameBox_TextChanged(object sender, TextChangedEventArgs e)

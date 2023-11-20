@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -76,10 +77,37 @@ namespace Enterprice_personell_department.Pages
             }
         }
 
+        public bool CheckForErrors()
+        {
+            string regex = @"^\d{6} \d{7}$";
+
+            if (!Regex.IsMatch(SeriesAndNumberOfDiplomaBox.Text, regex))
+            {
+                MessageBox.Show("Неправильно введёна серия и номер диплома!");
+                return false;
+            }
+
+            if (String.IsNullOrEmpty(EducationalOrganizationBox.Text) ||
+                String.IsNullOrEmpty(LevelOfEducationBox.Text) ||
+                String.IsNullOrEmpty(SeriesAndNumberOfDiplomaBox.Text) ||
+                String.IsNullOrEmpty(DateOfIssueDatepicker.Text) ||
+                String.IsNullOrEmpty(SpecialityBox.Text) ||
+                String.IsNullOrEmpty(QualificationBox.Text))
+            {
+                MessageBox.Show("Не все данные заполнены!");
+                return false;
+            }
+
+            return true;
+        }
+
         private void Employee_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPageEmployee(null));
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPageEmployee(null));
+            }
         }
 
         private void Education_Click(object sender, RoutedEventArgs e)
@@ -89,26 +117,39 @@ namespace Enterprice_personell_department.Pages
 
         private void FamilyMembers_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPageFamily());
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPageFamily());
+            }
         }
 
         private void Address_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPageAddress());
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPageAddress());
+            }
         }
 
         private void Job_title_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPageJobTitle());
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPageJobTitle());
+            }
         }
 
         private void Passport_details_Click(object sender, RoutedEventArgs e)
         {
-            AddToTempFile();
-            NavigationService?.Navigate(new AddEditPagePassportDetails());
+            if (CheckForErrors())
+            {
+                AddToTempFile();
+                NavigationService?.Navigate(new AddEditPagePassportDetails());
+
+            }
         }
 
         private void EducationalOrganizationBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -149,6 +190,13 @@ namespace Enterprice_personell_department.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             ReadTheFile();
+        }
+
+        private void SeriesAndNumberOfDiplomaBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!(Char.IsNumber(e.Text[0]) || e.Text[0] == ' ')) {
+                e.Handled = true;
+            }
         }
     }
 }
