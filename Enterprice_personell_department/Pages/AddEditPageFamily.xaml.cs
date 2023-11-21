@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Xceed.Wpf.Toolkit;
 
 namespace Enterprice_personell_department.Pages
 {
@@ -21,12 +22,47 @@ namespace Enterprice_personell_department.Pages
     /// </summary>
     public partial class AddEditPageFamily : Page
     {
+        private ЧленыСемьиСотрудника _currentFamily = new ЧленыСемьиСотрудника();
+
+        private Сотрудник _currentEmployee = new Сотрудник();
+
+        public bool isRedacting = false;
+
+        public string nameOfPage = "Family";
+
         public AddEditPageFamily()
         {
             InitializeComponent();
         }
 
-        public string nameOfPage = "Family";
+        public AddEditPageFamily(Сотрудник _employee)
+        {
+            InitializeComponent();
+
+            _currentEmployee = _employee;
+
+            _currentFamily= EPDEntities.GetContext().ЧленыСемьиСотрудника.Where(x => x.id_Сотрудника == _currentEmployee.id_Сотрудника).FirstOrDefault();
+            DataContext = _currentFamily;
+
+            isRedacting = true;
+
+            Save.Visibility = Visibility.Visible;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!isRedacting)
+                ReadTheFile();
+            else
+            {
+                if (_currentFamily.id_ВидаРодства == 4)
+                    KindOfRelationshipComboBox.SelectedIndex = 2;
+                else if (_currentFamily.id_ВидаРодства == 3)
+                    KindOfRelationshipComboBox.SelectedIndex = 3;
+                else
+                    KindOfRelationshipComboBox.SelectedIndex = _currentFamily.id_ВидаРодства - 1;
+            }
+        }
 
         public void ReadTheFile()
         {
@@ -114,17 +150,29 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPageEmployee(null));
-            } 
+                if (isRedacting)
+                    NavigationService?.Navigate(new AddEditPageEmployee(_currentEmployee));
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPageEmployee(null));
+                }
+            }
         }
 
         private void Education_Click(object sender, RoutedEventArgs e)
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPageEducation());
+                if (isRedacting)
+                {
+                    NavigationService?.Navigate(new AddEditPageEducation(_currentEmployee));
+                }
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPageEducation());
+                }
             }
         }
 
@@ -137,8 +185,15 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPageAddress());
+                if (isRedacting)
+                {
+                    NavigationService?.Navigate(new AddEditPageAddress(_currentEmployee));
+                }
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPageAddress());
+                }
             }
         }
 
@@ -146,8 +201,15 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPageJobTitle());
+                if (isRedacting)
+                {
+                    NavigationService?.Navigate(new AddEditPageJobTitle(_currentEmployee));
+                }
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPageJobTitle());
+                }
             }
         }
 
@@ -155,8 +217,15 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPagePassportDetails());
+                if (isRedacting)
+                {
+                    NavigationService?.Navigate(new AddEditPagePassportDetails(_currentEmployee));
+                }
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPagePassportDetails());
+                }
             }
         }
 
@@ -181,9 +250,26 @@ namespace Enterprice_personell_department.Pages
                 hintSurname.Visibility = Visibility.Hidden;
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Save_Click(object sender, RoutedEventArgs e)
         {
-            ReadTheFile();
+            if (!CheckForErrors())
+                return;
+
+            _currentFamily.Фамилия = SecondNameBox.Text;
+            _currentFamily.Имя = NameBox.Text;
+            _currentFamily.Отчество = SurnameBox.Text;
+
+            if (KindOfRelationshipComboBox.SelectedIndex == 2)
+                _currentFamily.id_ВидаРодства = 4;
+            else if (KindOfRelationshipComboBox.SelectedIndex == 3)
+                _currentFamily.id_ВидаРодства = 3;
+            else
+                _currentFamily.id_ВидаРодства = KindOfRelationshipComboBox.SelectedIndex + 1;
+
+            EPDEntities.GetContext().SaveChanges();
+
+
+            MessageBox.Show("Данные в БД успешно обновлены");
         }
     }
 }

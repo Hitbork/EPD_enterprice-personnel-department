@@ -22,10 +22,38 @@ namespace Enterprice_personell_department.Pages
     /// </summary>
     public partial class AddEditPageEducation : Page
     {
+        private Образование _currentEducation = new Образование();
+
+        private Сотрудник _currentEmployee = new Сотрудник();
+
+        public bool isRedacting = false;
+
         public string nameOfPage = "Education";
         public AddEditPageEducation()
         {
             InitializeComponent();
+        }
+
+        public AddEditPageEducation(Сотрудник _employee)
+        {
+            InitializeComponent();
+
+            _currentEmployee = _employee;
+
+            _currentEducation = EPDEntities.GetContext().Образование.Where(x => x.id_Сотрудника == _currentEmployee.id_Сотрудника).FirstOrDefault();
+            DataContext = _currentEducation;
+
+            isRedacting = true;
+
+            Save.Visibility = Visibility.Visible;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!isRedacting)
+                ReadTheFile();
+            else
+                DateOfIssueDatepicker.SelectedDate = (DateTime)_currentEducation.ДатаВыдачи;
         }
 
         public void ReadTheFile()
@@ -105,8 +133,13 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPageEmployee(null));
+                if (isRedacting)
+                    NavigationService?.Navigate(new AddEditPageEmployee(_currentEmployee));
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPageEmployee(null));
+                }
             }
         }
 
@@ -119,8 +152,15 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPageFamily());
+                if (isRedacting)
+                {
+                    NavigationService?.Navigate(new AddEditPageFamily(_currentEmployee));
+                }
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPageFamily());
+                }
             }
         }
 
@@ -128,8 +168,15 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPageAddress());
+                if (isRedacting)
+                {
+                    NavigationService?.Navigate(new AddEditPageAddress(_currentEmployee));
+                }
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPageAddress());
+                }
             }
         }
 
@@ -137,8 +184,15 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPageJobTitle());
+                if (isRedacting)
+                {
+                    NavigationService?.Navigate(new AddEditPageJobTitle(_currentEmployee));
+                }
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPageJobTitle());
+                }
             }
         }
 
@@ -146,9 +200,15 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPagePassportDetails());
-
+                if (isRedacting)
+                {
+                    NavigationService?.Navigate(new AddEditPagePassportDetails(_currentEmployee));
+                }
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPagePassportDetails());
+                }
             }
         }
 
@@ -187,16 +247,28 @@ namespace Enterprice_personell_department.Pages
                 hintQualification.Visibility= Visibility.Hidden;
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            ReadTheFile();
-        }
-
         private void SeriesAndNumberOfDiplomaBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!(Char.IsNumber(e.Text[0]) || e.Text[0] == ' ')) {
                 e.Handled = true;
             }
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            if (!CheckForErrors())
+                return;
+
+            _currentEducation.НазваниеУчебнойОрганизации = EducationalOrganizationBox.Text;
+            _currentEducation.УровеньОбразование = LevelOfEducationBox.Text;
+            _currentEducation.СерияНомерДиплома = SeriesAndNumberOfDiplomaBox.Text;
+            _currentEducation.ДатаВыдачи = (DateTime)DateOfIssueDatepicker.SelectedDate;
+            _currentEducation.Специальность = SpecialityBox.Text;
+            _currentEducation.Квалификация = QualificationBox.Text;
+
+            EPDEntities.GetContext().SaveChanges();
+
+            MessageBox.Show("Данные в БД успешно обновлены");
         }
     }
 }

@@ -59,6 +59,7 @@
             <Button Name="Address" Content="Адрес" Grid.Row="4" Grid.ColumnSpan="3" Click="Address_Click"/>
             <Button Name="Job_title" Content="Договор" Grid.Row="5" Grid.ColumnSpan="3" Click="Job_title_Click"/>
             <Button Name="Passport_details" Content="Пасп. данные" Grid.Row="6" Grid.ColumnSpan="3" Click="Passport_details_Click"/>
+            <Button Name="Save" Content="Сохранить" Grid.Row="7" Grid.Column="14" Grid.ColumnSpan="3" Visibility="Hidden" Click="Save_Click"/>
 
             <!--DateOfPreparation-->
             <Rectangle 

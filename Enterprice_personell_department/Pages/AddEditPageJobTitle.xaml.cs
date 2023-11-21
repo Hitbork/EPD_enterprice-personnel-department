@@ -21,12 +21,78 @@ namespace Enterprice_personell_department.Pages
     /// </summary>
     public partial class AddEditPageJobTitle : Page
     {
+
+        private Договор _currentAgreement= new Договор();
+
+        private Сотрудник _currentEmployee = new Сотрудник();
+
+        public bool isRedacting = false;
+
+        public string nameOfPage = "Agreement";
         public AddEditPageJobTitle()
         {
             InitializeComponent();
         }
 
-        public string nameOfPage = "Agreement";
+        public AddEditPageJobTitle(Сотрудник _employee)
+        {
+            InitializeComponent();
+
+            _currentEmployee = _employee;
+
+            _currentAgreement = EPDEntities.GetContext().Договор.Where(x => x.id_Договора == _currentEmployee.id_Договора).FirstOrDefault();
+            DataContext = _currentAgreement;
+
+            isRedacting = true;
+
+            Save.Visibility = Visibility.Visible;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!isRedacting)
+                ReadTheFile();
+            else
+            {
+                DateOfPreparationpicker.SelectedDate = _currentAgreement.ДатаСоставления;
+                EmploymentDatepicker.SelectedDate = _currentAgreement.ДатаПриема;
+                FireDatepicker.SelectedDate = _currentAgreement.ДатаУвольнение;
+
+                switch (_currentAgreement.id_Работы)
+                {
+                    case 1:
+                        TypeOfWorkComboBox.SelectedIndex = 2;
+                        break;
+                    case 2:
+                        TypeOfWorkComboBox.SelectedIndex = 4;
+                        break;
+                    case 3:
+                        TypeOfWorkComboBox.SelectedIndex = 3;
+                        break;
+                    case 4:
+                        TypeOfWorkComboBox.SelectedIndex = 7;
+                        break;
+                    case 5:
+                        TypeOfWorkComboBox.SelectedIndex = 0;
+                        break;
+                    case 6:
+                        TypeOfWorkComboBox.SelectedIndex = 8;
+                        break;
+                    case 7:
+                        TypeOfWorkComboBox.SelectedIndex = 1;
+                        break;
+                    case 8:
+                        TypeOfWorkComboBox.SelectedIndex = 9;
+                        break;
+                    case 9:
+                        TypeOfWorkComboBox.SelectedIndex = 5;
+                        break;
+                    case 10:
+                        TypeOfWorkComboBox.SelectedIndex = 6;
+                        break;
+                }
+            }
+        }
 
         public void ReadTheFile()
         {
@@ -138,8 +204,13 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPageEmployee(null));
+                if (isRedacting)
+                    NavigationService?.Navigate(new AddEditPageEmployee(_currentEmployee));
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPageEmployee(null));
+                }
             }
         }
 
@@ -147,8 +218,15 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPageEducation());
+                if (isRedacting)
+                {
+                    NavigationService?.Navigate(new AddEditPageEducation(_currentEmployee));
+                }
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPageEducation());
+                }
             }
         }
 
@@ -156,8 +234,15 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPageFamily());
+                if (isRedacting)
+                {
+                    NavigationService?.Navigate(new AddEditPageFamily(_currentEmployee));
+                }
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPageFamily());
+                }
             }
         }
 
@@ -165,28 +250,86 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPageAddress());
+                if (isRedacting)
+                {
+                    NavigationService?.Navigate(new AddEditPageAddress(_currentEmployee));
+                }
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPageAddress());
+                }
             }
         }
 
         private void Job_title_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void Passport_details_Click(object sender, RoutedEventArgs e)
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPagePassportDetails());
+                if (isRedacting)
+                {
+                    NavigationService?.Navigate(new AddEditPagePassportDetails(_currentEmployee));
+                }
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPagePassportDetails());
+                }
             }
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+
+        private void Save_Click(object sender, RoutedEventArgs e)
         {
-            ReadTheFile();
+            if (!CheckForErrors())
+                return;
+
+            _currentAgreement.ДатаСоставления = (DateTime)DateOfPreparationpicker.SelectedDate;
+            _currentAgreement.ДатаПриема = (DateTime)EmploymentDatepicker.SelectedDate;
+            _currentAgreement.ДатаУвольнение = (DateTime)FireDatepicker.SelectedDate;
+
+            switch (TypeOfWorkComboBox.SelectedIndex)
+            {
+                case 0:
+                    _currentAgreement.id_Работы = 5;
+                    break;
+                case 1:
+                    _currentAgreement.id_Работы = 7;
+                    break;
+                case 2:
+                    _currentAgreement.id_Работы = 1;
+                    break;
+                case 3:
+                    _currentAgreement.id_Работы = 3;
+                    break;
+                case 4:
+                    _currentAgreement.id_Работы = 2;
+                    break;
+                case 5:
+                    _currentAgreement.id_Работы = 9;
+                    break;
+                case 6:
+                    _currentAgreement.id_Работы = 10;
+                    break;
+                case 7:
+                    _currentAgreement.id_Работы = 4;
+                    break;
+                case 8:
+                    _currentAgreement.id_Работы = 6;
+                    break;
+                case 9: 
+                    _currentAgreement.id_Работы = 5;
+                    break;
+            }
+
+            EPDEntities.GetContext().SaveChanges();
+
+            MessageBox.Show("Данные в БД успешно обновлены");
         }
     }
 }

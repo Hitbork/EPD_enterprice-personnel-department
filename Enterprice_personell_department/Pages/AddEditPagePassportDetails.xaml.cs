@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Runtime.CompilerServices;
 
 namespace Enterprice_personell_department.Pages
 {
@@ -25,11 +26,41 @@ namespace Enterprice_personell_department.Pages
     /// </summary>
     public partial class AddEditPagePassportDetails : Page
     {
+        private ПаспортныеДанные _currentPassport = new ПаспортныеДанные();
+
+        private Сотрудник _currentEmployee = new Сотрудник();
+
+        public bool isRedacting = false;
 
         public string path = "temp.txt";
         public AddEditPagePassportDetails()
         {
             InitializeComponent();
+        }
+
+        public AddEditPagePassportDetails(Сотрудник _employee)
+        {
+            InitializeComponent();
+
+            _currentEmployee = _employee;
+
+            _currentPassport = EPDEntities.GetContext().ПаспортныеДанные.Where(x => x.id_Паспорта == _currentEmployee.id_Паспорта).FirstOrDefault();
+            DataContext = _currentPassport;
+
+            isRedacting = true;
+
+            Save.Visibility = Visibility.Visible;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!isRedacting)
+            {
+                SendInfo.Visibility = Visibility.Visible;
+                ReadTheFile();
+            }
+            else
+                DateOfBirthDatepicker.SelectedDate = _currentPassport.ДатаВыдачи;
         }
 
         public string nameOfPage = "Passport";
@@ -115,8 +146,13 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPageEmployee(null));
+                if (isRedacting)
+                    NavigationService?.Navigate(new AddEditPageEmployee(_currentEmployee));
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPageEmployee(null));
+                }
             }
         }
 
@@ -124,8 +160,15 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPageEducation());
+                if (isRedacting)
+                {
+                    NavigationService?.Navigate(new AddEditPageEducation(_currentEmployee));
+                }
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPageEducation());
+                }
             }
         }
 
@@ -133,8 +176,15 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPageFamily());
+                if (isRedacting)
+                {
+                    NavigationService?.Navigate(new AddEditPageFamily(_currentEmployee));
+                }
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPageFamily());
+                }
             }
         }
 
@@ -142,8 +192,15 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPageAddress());
+                if (isRedacting)
+                {
+                    NavigationService?.Navigate(new AddEditPageAddress(_currentEmployee));
+                }
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPageAddress());
+                }
             }
         }
 
@@ -151,8 +208,15 @@ namespace Enterprice_personell_department.Pages
         {
             if (CheckForErrors())
             {
-                AddToTempFile();
-                NavigationService?.Navigate(new AddEditPageJobTitle());
+                if (isRedacting)
+                {
+                    NavigationService?.Navigate(new AddEditPageJobTitle(_currentEmployee));
+                }
+                else
+                {
+                    AddToTempFile();
+                    NavigationService?.Navigate(new AddEditPageJobTitle());
+                }
             }
         }
 
@@ -196,10 +260,6 @@ namespace Enterprice_personell_department.Pages
                 hintLocation.Visibility = Visibility.Hidden;
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            ReadTheFile();
-        }
 
         private void SeriesAndNumberPassportBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -505,6 +565,29 @@ namespace Enterprice_personell_department.Pages
             var addedFamilyEntity = db.ЧленыСемьиСотрудника.Add(членыСемьиСотрудника);
 
             db.SaveChanges();
+
+            MessageBox.Show("Данные были успешно отправлены на сервер!");
+
+            File.WriteAllText(path, string.Empty);
+
+            NavigationService?.Navigate(new MainMenu());
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            if (!CheckForErrors())
+                return;
+
+            _currentPassport.НомерСерияПаспорта = SeriesAndNumberPassportBox.Text;
+            _currentPassport.КемВыдан = IssuedByBox.Text;
+            _currentPassport.ДатаВыдачи = (DateTime)DateOfBirthDatepicker.SelectedDate;
+            _currentPassport.КодПодразделения = DivisionCodeBox.Text;
+            _currentPassport.МестоРождения = PlaceOfBirthBox.Text;
+            _currentPassport.МестоЖительства = LocationBox.Text;
+
+            EPDEntities.GetContext().SaveChanges();
+
+            MessageBox.Show("Данные в БД успешно обновлены");
         }
     }
 }

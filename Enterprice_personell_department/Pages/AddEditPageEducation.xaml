@@ -59,6 +59,7 @@
             <Button Name="Address" Content="Адрес" Grid.Row="4" Grid.ColumnSpan="3" Click="Address_Click"/>
             <Button Name="Job_title" Content="Договор" Grid.Row="5" Grid.ColumnSpan="3" Click="Job_title_Click"/>
             <Button Name="Passport_details" Content="Пасп. данные" Grid.Row="6" Grid.ColumnSpan="3" Click="Passport_details_Click"/>
+            <Button Name="Save" Content="Сохранить" Grid.Row="7" Grid.Column="14" Grid.ColumnSpan="3" Visibility="Hidden" Click="Save_Click"/>
 
             <!--EducationalOrganization-->
             <Rectangle 
@@ -91,6 +92,7 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="2"
                 TextChanged="EducationalOrganizationBox_TextChanged"
+                Text="{Binding НазваниеУчебнойОрганизации}"
                 SelectionBrush="{x:Null}"
                 MaxLength="100"/>
 
@@ -125,6 +127,7 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="3"
                 TextChanged="LevelOfEducationBox_TextChanged"
+                Text="{Binding УровеньОбразование}"
                 SelectionBrush="{x:Null}"
                 MaxLength="30"/>
 
@@ -159,7 +162,8 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="4"
                 TextChanged="SeriesAndNumberOfDiplomaBox_TextChanged"
-                SelectionBrush="{x:Null}" Text="&#x9;"
+                SelectionBrush="{x:Null}" 
+                Text="{Binding СерияНомерДиплома}"
                 MaxLength="14"
                 PreviewTextInput="SeriesAndNumberOfDiplomaBox_PreviewTextInput"/>
 
@@ -230,6 +234,7 @@
                 Grid.ColumnSpan="8"
                 Grid.Row="3"
                 TextChanged="SpecialityBox_TextChanged"
+                Text="{Binding Специальность}"
                 SelectionBrush="{x:Null}"
                 MaxLength="100"/>
 
@@ -265,6 +270,7 @@
                 Grid.Row="4" 
                 TextChanged="QualificationBox_TextChanged"
                 SelectionBrush="{x:Null}"
+                Text="{Binding Квалификация}"
                 MaxLength="50"/>
         </Grid>
     </Canvas>
