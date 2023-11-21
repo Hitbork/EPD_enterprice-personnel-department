@@ -60,6 +60,8 @@
             <Button Name="Job_title" Content="Договор" Grid.Row="5" Grid.ColumnSpan="3" Click="Job_title_Click"/>
             <Button Name="Passport_details" Content="Пасп. данные" Grid.Row="6" Grid.ColumnSpan="3" Click="Passport_details_Click"/>
             <Button Name="Save" Content="Сохранить" Grid.Row="7" Grid.Column="14" Grid.ColumnSpan="3" Visibility="Hidden" Click="Save_Click"/>
+            <Button Name="BackToMainMenu" Content="Главное меню" Grid.Row="0" Grid.Column="17" Grid.ColumnSpan="3" Click="BackToMainMenu_Click"/>
+
 
             <!--SecondName-->
             <Rectangle 

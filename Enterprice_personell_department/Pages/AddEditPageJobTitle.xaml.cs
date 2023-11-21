@@ -331,5 +331,16 @@ namespace Enterprice_personell_department.Pages
 
             MessageBox.Show("Данные в БД успешно обновлены");
         }
+
+        private void BackToMainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            if (!isRedacting)
+            {
+                if (!CheckForErrors())
+                    return;
+            }
+
+            NavigationService?.Navigate(new MainMenu());
+        }
     }
 }

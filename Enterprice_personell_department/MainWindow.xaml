@@ -16,7 +16,7 @@
         <Label x:Name="CurrentTime" Content="Label" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" VerticalAlignment="Center" RenderTransformOrigin="-0.11,0.498"/>
         <Button x:Name="ButtonBack" Content="Назад" HorizontalAlignment="Left" Margin="10,0,0,0" RenderTransformOrigin="-0.275,-0.044" VerticalAlignment="Center" Click="ButtonBack_Click"/>
         <Button x:Name="ExitButton" Content="Выход" HorizontalAlignment="Left" Margin="1104,0,0,0" Grid.Row="2" VerticalAlignment="Center" Click="Button_Click"/>
-        <Button x:Name="ExportButton" Content="Экспорт" HorizontalAlignment="Left" Margin="1000,0,0,0" Click="ExportButton_Click"/>
-        <Button x:Name="ImportButton" Content="Импорт" HorizontalAlignment="Left" Margin="500,0,0,0" Click="ImportButton_Click"/>
+        <!--<Button x:Name="ExportButton" Content="Экспорт" HorizontalAlignment="Left" Margin="1000,0,0,0" Click="ExportButton_Click"/>
+        <Button x:Name="ImportButton" Content="Импорт" HorizontalAlignment="Left" Margin="500,0,0,0" Click="ImportButton_Click"/>-->
     </Grid>
 </Window>

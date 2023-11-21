@@ -139,7 +139,7 @@ namespace Enterprice_personell_department.Pages
                 String.IsNullOrEmpty(NameBox.Text) ||
                 String.IsNullOrEmpty(KindOfRelationshipComboBox.Text))
             {
-                MessageBox.Show("Не все данные заполнены!");
+                System.Windows.MessageBox.Show("Не все данные заполнены!");
                 return false;
             }
 
@@ -269,7 +269,18 @@ namespace Enterprice_personell_department.Pages
             EPDEntities.GetContext().SaveChanges();
 
 
-            MessageBox.Show("Данные в БД успешно обновлены");
+            System.Windows.MessageBox.Show("Данные в БД успешно обновлены");
+        }
+
+        private void BackToMainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            if (!isRedacting)
+            {
+                if (!CheckForErrors())
+                    return;
+            }
+
+            NavigationService?.Navigate(new MainMenu());
         }
     }
 }

@@ -46,8 +46,11 @@ namespace Enterprice_personell_department.Pages
 
             try
             {
-                EPDEntities.GetContext().Сотрудник.RemoveRange(employeesForRemoving);
-                EPDEntities.GetContext().SaveChanges();
+                var getContext = EPDEntities.GetContext();
+                getContext.Образование.RemoveRange(getContext.Образование.Where(x => employeesForRemoving.Select(i => i.id_Сотрудника).Contains(x.id_Сотрудника)));
+                getContext.ЧленыСемьиСотрудника.RemoveRange(getContext.ЧленыСемьиСотрудника .Where(x => employeesForRemoving.Select(i => i.id_Сотрудника).Contains(x.id_Сотрудника)));
+                getContext.Сотрудник.RemoveRange(employeesForRemoving);
+                getContext.SaveChanges();
                 MessageBox.Show("Данные успешно удалены!");
             } catch (Exception ex)
             {

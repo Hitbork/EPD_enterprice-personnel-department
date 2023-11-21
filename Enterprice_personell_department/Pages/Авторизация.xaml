@@ -52,9 +52,9 @@
             </Grid.RowDefinitions>
 
             <!--Light/Dark theme-->
-            <Button x:Name="Theme_Button" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Margin="0,0,0,0" Click="Theme_Button_Click">
+            <!--<Button x:Name="Theme_Button" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Margin="0,0,0,0" Click="Theme_Button_Click">
                 <Image Source="../Images/sun-moon.png" Width="30" Height="30"/>
-            </Button>
+            </Button>-->
             
             <!--Authorization/registration-->
             <Button
@@ -109,7 +109,8 @@
                 Grid.Column="1" 
                 Grid.ColumnSpan="8" 
                 TextChanged="LoginBox_TextChanged" 
-                SelectionBrush="{x:Null}"/>
+                SelectionBrush="{x:Null}"
+                TextAlignment="Center"/>
             
             <Image 
                 x:Name="TipForLogin" 
@@ -156,6 +157,7 @@
                 x:Name="PasswordBox" 
                 Grid.Row="4" 
                 Grid.Column="1" 
+                HorizontalContentAlignment="Center"
                 Grid.ColumnSpan="8" 
                 PasswordChanged="PasswordBox_PasswordChanged"/>
             

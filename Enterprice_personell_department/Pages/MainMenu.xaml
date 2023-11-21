@@ -68,7 +68,7 @@
             </DataGrid>
             <Button Name="AddNewEmployee" Content="Добавить" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" Click="AddNewEmployee_Click"/>
             <Button Name="DeleteEmployees" Content="Удалить" Grid.Row="8" Grid.Column="16" Grid.ColumnSpan="3" Click="DeleteEmployees_Click"/>
-            <Button Name="UserPage" Content="Пользователи" Grid.Column="6" Grid.ColumnSpan="9" Click="UserPage_Click"/>
+            <!--<Button Name="UserPage" Content="Пользователи" Grid.Column="6" Grid.ColumnSpan="9" Click="UserPage_Click"/>-->
         </Grid>
     </Canvas>
 </Page>
